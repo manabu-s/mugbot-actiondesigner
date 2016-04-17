@@ -16,6 +16,8 @@ print("Start Mugbot Scratch Server...\n")
 while true
   Thread.start(server.accept) do | sock |
     system(`/home/pi/mugbot-talk-1.1.sh スクラッチとの接続を開始しました`)
+    # for speak in English
+    # system(`espeak -ven+f3 -k5 -s150 "Scratch connection established"`)
     while buf = sock.gets
       begin
         json = JSON.parse(buf)
@@ -51,6 +53,8 @@ while true
         when 'speech' then
           sp.putc "t"
           system(`/home/pi/mugbot-talk-1.1.sh #{json['arg'].to_s}`)
+          # for speak in English
+          # system(`espeak -ven+f3 -k5 -s150 "#{json['arg'].to_s}"`)
           sp.putc "k"
         else
           print("Error\n")
